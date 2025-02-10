@@ -27,7 +27,7 @@ document.getElementById('saveProjectBtn').addEventListener('click', function() {
         console.error('Error:', error);
     });
 });
-
+/*
 document.getElementById('saveUserBtn').addEventListener('click', function() {
     const firstName = document.getElementById('userFirstName').value;
     const lastName = document.getElementById('userLastName').value;
@@ -49,6 +49,44 @@ document.getElementById('saveUserBtn').addEventListener('click', function() {
         console.error('Error:', error);
     });
 });
+*/
+//---------------------------------
+document.getElementById("saveUserBtn").addEventListener("click", function() {
+    const firstName = document.getElementById("userFirstName").value;
+    const lastName = document.getElementById("userLastName").value;
+    const lehrgang = document.getElementById("userLehrgang").value;
+
+    if (!firstName || !lastName || !lehrgang) {
+        alert("Bitte füllen Sie alle Felder aus.");
+        return;
+    }
+
+    fetch("save_user.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            first_name: firstName,
+            last_name: lastName,
+            lehrgang: lehrgang
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Mitarbeiter erfolgreich gespeichert.");
+        } else {
+            alert("Fehler: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Fehler beim Speichern:", error);
+        alert("Ein unerwarteter Fehler ist aufgetreten.");
+    });
+});
+//---------------------------------
+
 
 document.getElementById('assignUserBtn').addEventListener('click', function() {
     const projectId = document.getElementById('projectSelect').value;
@@ -68,7 +106,7 @@ document.getElementById('assignUserBtn').addEventListener('click', function() {
         location.reload(); // Seite neu laden, um die Liste zu aktualisieren
     })
     .catch((error) => {
-        console.error('Error:', error);
+        console.error('User could not be added.:', error);
     });
 });
 

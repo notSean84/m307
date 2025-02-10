@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-$conn = new mysqli('127.0.0.1:3306', 'root', '', 'm307');
+$conn = new mysqli('localhost', 'root', '', 'm307');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
