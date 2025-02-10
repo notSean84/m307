@@ -14,13 +14,13 @@ body {
     gap: 20px;
 }
 
-.project_section, .user_section, .assignment_section {
+.project_section, .user_section {
     min-width: 20vw;
     width: 20vw;
     max-width: 20vw;
 }
 
-.project_header, .user_header, .assignment_header {
+.project_header, .user_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,14 +30,9 @@ body {
 .project_info {
     display: flex;
     justify-content: space-between;
+
 }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
 
 button {
     padding: 8px 16px;
@@ -63,12 +58,3 @@ button:hover {
     border-radius: 4px;
     margin-bottom: 5px;
 }
-
-.assignment_form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-
-    

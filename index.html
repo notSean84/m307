@@ -12,27 +12,60 @@
             <section class="project_section">
                 <div class="project_header">
                     <h1>Projekte</h1>
-                    <button>+ Neues Projekt</button>
+                    <button id="newProjectBtn">+ Neues Projekt</button>
+                </div>
+                <div id="projectForm" class="form-container" style="display: none;">
+                    <input type="text" id="projectName" placeholder="Projekt Name">
+                    <input type="date" id="projectStartDate">
+                    <input type="date" id="projectEndDate">
+                    <button id="saveProjectBtn">Projekt speichern</button>
                 </div>
                 <div class="project_info">
                     <h3>Projekt Name</h3>
                     <h3>Startdatum | Enddatum</h3>
                 </div>
                 <div class="project_member">
-                    
+                    <!-- Dynamisch gefüllt -->
                 </div>
+                <section class="assignment_section">
+                    <div class="assignment_header">
+                        <h1>Mitarbeiter zuweisen</h1>
+                    </div>
+                    <div class="assignment_form">
+                        <label for="projectSelect">Projekt auswählen:</label>
+                        <select id="projectSelect">
+                            <!-- Dynamisch gefüllt -->
+                        </select>
+                        <br>
+                        <label for="userSelect">Mitarbeiter auswählen:</label>
+                        <select id="userSelect">
+                            <!-- Dynamisch gefüllt -->
+                        </select>
+                        <br>
+                        <label for="roleName">Rolle auswählen:</label>
+                        <input type="text" id="roleName" placeholder="Rolle">
+                        <button id="assignUserBtn">Mitarbeiter zuweisen</button>
+                    </div>
+                </section>
             </section>
             <section class="user_section">
                 <div class="user_header">
                     <h1>Mitarbeiter</h1>
+                    <button id="newUserBtn">+ Neuer Mitarbeiter</button>
+                </div>
+                <div id="userForm" class="form-container" style="display: none;">
+                    <input type="text" id="userFirstName" placeholder="Vorname">
+                    <input type="text" id="userLastName" placeholder="Nachname">
+                    <input type="text" id="userLehrgang" placeholder="Lehrgang">
+                    <button id="saveUserBtn">Mitarbeiter speichern</button>
                 </div>
                 <div class="user_list">
-                    <div class="user_box">
-                        <p>Bruno Huber</p>
-                    </div>
+                    <!-- Dynamisch gefüllt -->
                 </div>
             </section>
+            
         </div>
     </main>
+    <script src="./assets/scripts/main.js"></script>
 </body>
 </html>
