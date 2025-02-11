@@ -53,12 +53,12 @@
                     <h1>Mitarbeiter</h1>
                     <button id="newUserBtn">+ Neuer Mitarbeiter</button>
                 </div>
-                <div id="userForm" class="form-container" style="display: none;">
-                    <input type="text" id="userFirstName" placeholder="Vorname">
-                    <input type="text" id="userLastName" placeholder="Nachname">
-                    <input type="text" id="userLehrgang" placeholder="Lehrgang">
-                    <button id="saveUserBtn">Mitarbeiter speichern</button>
-                </div>
+                <form enctype="multipart/form-data" id="userForm" class="form-container" style="display: none;" action="./save_user.php" method="post">
+                    <input type="text" name="userFirstName" placeholder="Vorname" required>
+                    <input type="text" name="userLastName" placeholder="Nachname" required>
+                    <input type="text" name="userLehrgang" placeholder="Lehrgang">
+                    <button type="submit" id="saveUserBtn">Mitarbeiter speichern</button>
+                </form>                
                 <div class="user_list">
                     <!-- Dynamisch gefüllt -->
                 </div>

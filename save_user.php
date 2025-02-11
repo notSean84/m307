@@ -1,22 +1,16 @@
 <?php
-header('Content-Type: application/json');
+include "db.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $firstName = $_POST['userFirstName'];
+    $lastName = $_POST['userLastName'];
+    $lehrgang = $_POST['userLehrgang'];
 
-$data = json_decode(file_get_contents('php://input'), true);
-
-$conn = new mysqli('localhost', 'root', '', 'm307');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $sql = "INSERT INTO teammember (first_name, last_name, lehrgang) VALUES ('$firstName', '$lastName', '$lehrgang')";
+    if ($conn->query($sql) === TRUE) {
+        header("Location: index.html"); // Weiterleitung zurück zur Startseite
+        exit();
+    } else {
+        echo "Fehler: " . $conn->error;
+    }    
+    $conn->close();
 }
-
-$stmt = $conn->prepare("INSERT INTO teammember (first_name, last_name, lehrgang) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $data['first_name'], $data['last_name'], $data['lehrgang']);
-
-if ($stmt->execute()) {
-    echo json_encode(['status' => 'success']);
-} else {
-    echo json_encode(['status' => 'error', 'message' => $stmt->error]);
-}
-
-$stmt->close();
-$conn->close();
-?>
