@@ -14,12 +14,12 @@
                     <h1>Projekte</h1>
                     <button id="newProjectBtn">+ Neues Projekt</button>
                 </div>
-                <div id="projectForm" class="form-container" style="display: none;">
-                    <input type="text" id="projectName" placeholder="Projekt Name">
-                    <input type="date" id="projectStartDate">
-                    <input type="date" id="projectEndDate">
-                    <button id="saveProjectBtn">Projekt speichern</button>
-                </div>
+                <form enctype="multipart/form-data" id="projectForm" class="form-container" style="display: none;" action="./assets/php/save_projects.php" method="post">
+                    <input type="text" name="projectName" placeholder="Projekt Name">
+                    <input type="date" name="projectStartDate">
+                    <input type="date" name="projectEndDate">
+                    <button type="submit" id="saveProjectBtn">Projekt speichern</button>
+                </form>
                 <div class="project_info">
                     <h3>Projekt Name</h3>
                     <h3>Startdatum | Enddatum</h3>
