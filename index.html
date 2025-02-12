@@ -54,9 +54,9 @@
                     <button id="newUserBtn">+ Neuer Mitarbeiter</button>
                 </div>
                 <form enctype="multipart/form-data" id="userForm" class="form-container" style="display: none;" action="./assets/php/save_user.php" method="post">
-                    <input type="text" name="userFirstName" placeholder="Vorname" required>
-                    <input type="text" name="userLastName" placeholder="Nachname" required>
-                    <input type="text" name="userLehrgang" placeholder="Lehrgang">
+                    <input class="userInput" type="text" name="userFirstName" placeholder="Vorname" required> <br>
+                    <input class="userInput" type="text" name="userLastName" placeholder="Nachname" required> <br>
+                    <input class="userInput" type="text" name="userLehrgang" placeholder="Lehrgang"> <br>
                     <button type="submit" id="saveUserBtn">Mitarbeiter speichern</button>
                 </form>                
                 <div class="user_list">

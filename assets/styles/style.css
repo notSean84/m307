@@ -70,5 +70,7 @@ button:hover {
     gap: 10px;
 }
 
-
+.userInput {
+width: 100%;
+}
     

@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "INSERT INTO teammember (first_name, last_name, lehrgang) VALUES ('$firstName', '$lastName', '$lehrgang')";
     if ($conn->query($sql) === TRUE) {
-        header("Location: index.html"); // Weiterleitung zurück zur Startseite
+        header("Location: /index.html"); // Weiterleitung zurück zur Startseite
         exit();
     } else {
         echo "Fehler: " . $conn->error;
