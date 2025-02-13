@@ -11,23 +11,27 @@ body {
 .panel {
     display: flex;
     padding: 20px;
-    gap: 20px;
+    gap: 50px;
 }
 
-.project_section, .user_section, .assignment_section {
+.project-section,
+.user-section,
+.assignment-section {
     min-width: 20vw;
     width: 20vw;
     max-width: 20vw;
 }
 
-.project_header, .user_header, .assignment_header {
+.project-header,
+.user-header,
+.assignment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.project_info {
+.project-info {
     display: flex;
     justify-content: space-between;
 }
@@ -37,6 +41,16 @@ body {
     flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
+}
+
+.submit-btn {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
 }
 
 button {
@@ -52,11 +66,11 @@ button:hover {
     background-color: #0056b3;
 }
 
-.user_list {
+.user-list {
     margin-top: 10px;
 }
 
-.user_box {
+.user-box {
     width: fit-content;
     padding: 10px;
     background: #eaeaea;
@@ -64,13 +78,13 @@ button:hover {
     margin-bottom: 5px;
 }
 
-.assignment_form {
+.assignment-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.userInput {
-width: 100%;
+.date-container {
+    display: flex;
+    gap: 10px;
 }
-    

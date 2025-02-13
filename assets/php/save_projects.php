@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // WICHTIG: AUTO INCREMENT MUSS BEI PROJECT UND ROLE NOCHT EINGESTELLT WERDEN
     $sql = "INSERT INTO project (name, start_date, end_date) VALUES ('$projectName', '$startDate', '$endDate')";
     if ($conn->query($sql) === TRUE) {
-        header("Location: index.html"); // Weiterleitung zurück zur Startseite
+        header("Location: /index.php"); // Weiterleitung zurück zur Startseite
         exit();
     } else {
         echo "Fehler: " . $conn->error;
