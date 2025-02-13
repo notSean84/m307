@@ -75,11 +75,6 @@
                             }
                             ?>
 
-
-                            <option value=""></option>
-
-
-
                         </select>
                         <label for="userSelect">Mitarbeiter auswählen:</label>
                         <select id="userSelect">
@@ -103,10 +98,6 @@
                                 echo "Fehler bei der Ausführung der Abfrage.";
                             }
                             ?>
-
-
-                            <option value=""></option>
-
 
 
                         </select>
@@ -140,7 +131,29 @@
 
                 <!--Mitarbeiter Anzeige-->
                 <div class="user-list">
+                    <h3>Alle Mitarbeiter:</h3>
                     <!-- Dynamisch gefüllt -->
+                    <?php
+                               
+                                include "./assets/php/db.php";
+                                
+                                $sql = "SELECT * FROM teammember";
+                                $stmt = $conn->prepare($sql);
+                                
+                                if ($stmt->execute()) {
+                                    $result = $stmt->get_result();
+                                
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . 
+                                        ' <a href="./assets/php/delete.php?id=' . $row['teammember_id'] . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter wirklich löschen?\')">❌</a></p>';
+                                    }
+                                } else {
+                                    echo "Fehler bei der Ausführung der Abfrage.";
+                                }
+                                 
+                            ?>
+                            
+                
                 </div>
             </section>
 

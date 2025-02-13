@@ -88,3 +88,7 @@ button:hover {
     display: flex;
     gap: 10px;
 }
+
+.teammeber-list {
+    font-size: 16px;   
+}
