@@ -31,3 +31,24 @@ document.querySelectorAll(".editBtn").forEach(btn => {
     });
 });
 
+document.querySelectorAll(".editProjectBtn").forEach(btn => {
+    btn.addEventListener("click", function(event) {
+        event.preventDefault(); // Standard-Link-Verhalten verhindern
+        let projectId = this.getAttribute("data-id"); 
+        let editForm = document.getElementById("editProjectForm-" + projectId);
+
+        // Alle anderen Bearbeitungsformulare ausblenden (aber nicht das Assign-Form)
+        document.querySelectorAll(".form-container").forEach(form => {
+            if (!form.id.includes("assigForm")) {
+                form.style.display = "none";
+            }
+        });
+
+        // Nur das angeklickte Formular einblenden
+        if (editForm.style.display === "none" || editForm.style.display === "") {
+            editForm.style.display = "flex";
+        } else {
+            editForm.style.display = "none";
+        }
+    });
+});

@@ -41,7 +41,6 @@
                     <h3>Startdatum | Enddatum</h3>
                 </div>
                 <div class="project-list">
-
                     <?php
                     include "./assets/php/db.php";
 
@@ -51,16 +50,34 @@
                     if ($stmt->execute()) {
                         $result = $stmt->get_result();
                         while ($row = $result->fetch_assoc()) {
+                            $projectId = $row['project_id'];
                             $startDate = date("d.m.Y", strtotime($row['start_date']));
                             $endDate = date("d.m.Y", strtotime($row['end_date']));
 
                             echo '<p class="project-list">' . htmlspecialchars($row['name']) . ' (' . htmlspecialchars($startDate) . ' - ' . htmlspecialchars($endDate) . ') ' .
-                                ' <a href="./assets/php/delete_project.php?id=' . $row['project_id'] . '" class="delete-btn" onclick="return confirm(\'Projekt wirklich löschen?\')">❌</a></p>';
+                                ' <a href="./assets/php/delete_project.php?id=' . $projectId . '" class="delete-btn" onclick="return confirm(\'Projekt wirklich löschen?\')" style="text-decoration: none;">❌</a>' .
+                                ' <a href="#" class="editProjectBtn" data-id="' . $projectId . '" style="text-decoration: none;">🖊️</a></p>';
+
+                            // Verstecktes Bearbeitungsformular für das Projekt
+                            echo '<form action="./assets/php/edit_project.php?id=' . $projectId . '" method="POST" class="form-container" id="editProjectForm-' . $projectId . '" style="display: none;">
+                <label for="projectName">Projektname:</label>
+                <input type="text" name="projectName" value="' . htmlspecialchars($row['name']) . '" required>
+
+                <label for="startDate">Startdatum:</label>
+                <input type="date" name="startDate" value="' . $row['start_date'] . '" required>
+
+                <label for="endDate">Enddatum:</label>
+                <input type="date" name="endDate" value="' . $row['end_date'] . '" required>
+
+                <button type="submit" class="submit-btn">Änderungen speichern</button>
+            </form>';
                         }
                     } else {
                         echo "Fehler bei der Ausführung der Abfrage.";
                     }
                     ?>
+
+
 
 
                 </div>
@@ -172,10 +189,10 @@
 
                         while ($row = $result->fetch_assoc()) {
                             $teammember_id = $row['teammember_id']; // ID speichern
-                            echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . " | " . htmlspecialchars($row['lehrgang']) . 
+                            echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . " | " . htmlspecialchars($row['lehrgang']) .
                                 ' <a href="./assets/php/delete_user.php?id=' . $teammember_id . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter:in wirklich löschen?\')" style="text-decoration: none;">❌</a>' .
                                 ' <a style="text-decoration: none; cursor: pointer;" class="editBtn" data-id="' . $teammember_id . '">🖊️</a></p>' .
-                        
+
                                 '<form action="./assets/php/edit_user.php?id=' . $teammember_id . '" enctype="multipart/form-data" class="form-container" style="display: none;" id="editForm-' . $teammember_id . '" method="POST">
                                     <label for="userFirstName">Vorname:</label>
                                     <input class="userInput" type="text" name="userFirstName" value="' . htmlspecialchars($row['first_name']) . '" required>
@@ -186,7 +203,6 @@
                                     <button class="submit-btn" type="submit">Änderungen speichern</button>
                                 </form>';
                         }
-                        
                     } else {
                         echo "Fehler bei der Ausführung der Abfrage.";
                     }
@@ -203,19 +219,3 @@
 </body>
 
 </html>
-
-<!--
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . " | " . htmlspecialchars($row['lehrgang']) . 
-                                ' <a href="./assets/php/delete_user.php?id=' . $row['teammember_id'] . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter:in wirklich löschen?\')" style="text-decoration: none;">❌</a>' .
-                                ' <a style="text-decoration: none; cursor: pointer;" id="editBtn" >🖊️</a></p>' .
-                                ' <form action="./assets/php/edit_user.php?id=' . $row['teammember_id'] . '" enctype="multipart/form-data" class="form-container" style="display: none;" id="editForm" method="POST">
-                                    <label for="userFirstName">Vorname:</label>
-                                    <input class="userInput" type="text" name="userFirstName" required>
-                                    <label for="userLastName">Nachname:</label>
-                                    <input class="userInput" type="text" name="userLastName" required>
-                                    <label for="userLehrgang">Lehrgang:</label>
-                                    <input class="userInput" type="text" name="userLehrgang">
-                                    <button class="submit-btn" type="submit" id="saveEditBtn">Änderungen speichern</button>
-                                </form> ';
-                -->
