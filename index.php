@@ -77,9 +77,9 @@
 
                     <!--Formular um Mitarbeiter zuweisen-->
                     <form enctype="multipart/form-data" id="assigForm" class="form-container" action="./assets/php/assign_member.php" method="post">
-                    <label for="projectSelect">Projekt auswählen:</label>
+                        <label for="projectSelect">Projekt auswählen:</label>
                         <select id="projectSelect" name="projectSelect">
-                        <!-- Dynamisch gefüllt -->
+                            <!-- Dynamisch gefüllt -->
                             <option value="" hidden selected disabled>-- Projekte --</option>
 
                             <?php
@@ -103,7 +103,7 @@
                         </select>
                         <label for="userSelect">Mitarbeiter auswählen:</label>
                         <select id="userSelect" name="userSelect">
-                        <!-- Dynamisch gefüllt -->
+                            <!-- Dynamisch gefüllt -->
                             <option value="" hidden selected disabled>-- Teammitglieder --</option>
 
                             <?php
@@ -132,7 +132,7 @@
                         <button type="submit" class="submit-btn" id="assignBtn">Mitarbeiter zuweisen</button>
                     </form>
 
-                            
+
 
                 </section>
             </section>
@@ -171,9 +171,22 @@
                         $result = $stmt->get_result();
 
                         while ($row = $result->fetch_assoc()) {
-                            echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) .
-                                ' <a href="./assets/php/delete_user.php?id=' . $row['teammember_id'] . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter:in wirklich löschen?\')">❌</a></p>';
+                            $teammember_id = $row['teammember_id']; // ID speichern
+                            echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . " | " . htmlspecialchars($row['lehrgang']) . 
+                                ' <a href="./assets/php/delete_user.php?id=' . $teammember_id . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter:in wirklich löschen?\')" style="text-decoration: none;">❌</a>' .
+                                ' <a style="text-decoration: none; cursor: pointer;" class="editBtn" data-id="' . $teammember_id . '">🖊️</a></p>' .
+                        
+                                '<form action="./assets/php/edit_user.php?id=' . $teammember_id . '" enctype="multipart/form-data" class="form-container" style="display: none;" id="editForm-' . $teammember_id . '" method="POST">
+                                    <label for="userFirstName">Vorname:</label>
+                                    <input class="userInput" type="text" name="userFirstName" value="' . htmlspecialchars($row['first_name']) . '" required>
+                                    <label for="userLastName">Nachname:</label>
+                                    <input class="userInput" type="text" name="userLastName" value="' . htmlspecialchars($row['last_name']) . '" required>
+                                    <label for="userLehrgang">Lehrgang:</label>
+                                    <input class="userInput" type="text" name="userLehrgang" value="' . htmlspecialchars($row['lehrgang']) . '">
+                                    <button class="submit-btn" type="submit">Änderungen speichern</button>
+                                </form>';
                         }
+                        
                     } else {
                         echo "Fehler bei der Ausführung der Abfrage.";
                     }
@@ -190,3 +203,19 @@
 </body>
 
 </html>
+
+<!--
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . " | " . htmlspecialchars($row['lehrgang']) . 
+                                ' <a href="./assets/php/delete_user.php?id=' . $row['teammember_id'] . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter:in wirklich löschen?\')" style="text-decoration: none;">❌</a>' .
+                                ' <a style="text-decoration: none; cursor: pointer;" id="editBtn" >🖊️</a></p>' .
+                                ' <form action="./assets/php/edit_user.php?id=' . $row['teammember_id'] . '" enctype="multipart/form-data" class="form-container" style="display: none;" id="editForm" method="POST">
+                                    <label for="userFirstName">Vorname:</label>
+                                    <input class="userInput" type="text" name="userFirstName" required>
+                                    <label for="userLastName">Nachname:</label>
+                                    <input class="userInput" type="text" name="userLastName" required>
+                                    <label for="userLehrgang">Lehrgang:</label>
+                                    <input class="userInput" type="text" name="userLehrgang">
+                                    <button class="submit-btn" type="submit" id="saveEditBtn">Änderungen speichern</button>
+                                </form> ';
+                -->
