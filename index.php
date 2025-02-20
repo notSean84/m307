@@ -40,6 +40,31 @@
                     <h3>Projekt Name</h3>
                     <h3>Startdatum | Enddatum</h3>
                 </div>
+                <div class="project-list">
+
+                    <?php
+                    include "./assets/php/db.php";
+
+                    $sql = "SELECT * FROM project";
+                    $stmt = $conn->prepare($sql);
+
+                    if ($stmt->execute()) {
+                        $result = $stmt->get_result();
+                        while ($row = $result->fetch_assoc()) {
+                            $startDate = date("d.m.Y", strtotime($row['start_date']));
+                            $endDate = date("d.m.Y", strtotime($row['end_date']));
+
+                            echo '<p class="project-list">' . htmlspecialchars($row['name']) . ' (' . htmlspecialchars($startDate) . ' - ' . htmlspecialchars($endDate) . ') ' .
+                                ' <a href="./assets/php/delete_project.php?id=' . $row['project_id'] . '" class="delete-btn" onclick="return confirm(\'Projekt wirklich löschen?\')">❌</a></p>';
+                        }
+                    } else {
+                        echo "Fehler bei der Ausführung der Abfrage.";
+                    }
+                    ?>
+
+
+                </div>
+
 
                 <!--Projekt Mitglieder Anzeige-->
                 <div class="project-member">
@@ -52,14 +77,14 @@
 
                     <!--Formular um Mitarbeiter zuweisen-->
                     <form enctype="multipart/form-data" id="assigForm" class="form-container" action="./assets/php/assign_member.php" method="post">
-                        <label for="projectSelect">Projekt auswählen:</label>
-                        <select id="projectSelect">
-                            <!-- Dynamisch gefüllt -->
+                    <label for="projectSelect">Projekt auswählen:</label>
+                        <select id="projectSelect" name="projectSelect">
+                        <!-- Dynamisch gefüllt -->
                             <option value="" hidden selected disabled>-- Projekte --</option>
 
                             <?php
                             include "./assets/php/db.php";
-                            $sql = "SELECT name FROM project";
+                            $sql = "SELECT * FROM project";
                             $stmt = $conn->prepare($sql);
 
                             // SQL-Abfrage ausführen
@@ -77,9 +102,9 @@
 
                         </select>
                         <label for="userSelect">Mitarbeiter auswählen:</label>
-                        <select id="userSelect">
-                            <!-- Dynamisch gefüllt -->
-                            <option value="" hidden selected disabled>-- Teammitglieder  --</option>
+                        <select id="userSelect" name="userSelect">
+                        <!-- Dynamisch gefüllt -->
+                            <option value="" hidden selected disabled>-- Teammitglieder --</option>
 
                             <?php
                             include "./assets/php/db.php";
@@ -102,10 +127,12 @@
 
                         </select>
                         <label for="roleName">Rolle auswählen:</label>
-                        <input type="text" id="roleName" placeholder="Rolle">
+                        <input type="text" id="roleName" name="roleName" placeholder="Rolle">
                         <br>
-                        <button class="submit-btn" id="assignBtn">Mitarbeiter zuweisen</button>
+                        <button type="submit" class="submit-btn" id="assignBtn">Mitarbeiter zuweisen</button>
                     </form>
+
+                            
 
                 </section>
             </section>
@@ -134,26 +161,26 @@
                     <h3>Alle Mitarbeiter:</h3>
                     <!-- Dynamisch gefüllt -->
                     <?php
-                               
-                                include "./assets/php/db.php";
-                                
-                                $sql = "SELECT * FROM teammember";
-                                $stmt = $conn->prepare($sql);
-                                
-                                if ($stmt->execute()) {
-                                    $result = $stmt->get_result();
-                                
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . 
-                                        ' <a href="./assets/php/delete.php?id=' . $row['teammember_id'] . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter wirklich löschen?\')">❌</a></p>';
-                                    }
-                                } else {
-                                    echo "Fehler bei der Ausführung der Abfrage.";
-                                }
-                                 
-                            ?>
-                            
-                
+
+                    include "./assets/php/db.php";
+
+                    $sql = "SELECT * FROM teammember";
+                    $stmt = $conn->prepare($sql);
+
+                    if ($stmt->execute()) {
+                        $result = $stmt->get_result();
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) .
+                                ' <a href="./assets/php/delete_user.php?id=' . $row['teammember_id'] . '" class="delete-btn" onclick="return confirm(\'Mitarbeiter:in wirklich löschen?\')">❌</a></p>';
+                        }
+                    } else {
+                        echo "Fehler bei der Ausführung der Abfrage.";
+                    }
+
+                    ?>
+
+
                 </div>
             </section>
 
