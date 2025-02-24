@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             if ($stmt->execute()) {
                 echo "Erfolgreich zugewiesen!";
+                header("Location: /index.php");
             } else {
                 echo "Fehler: " . $stmt->error;
             }

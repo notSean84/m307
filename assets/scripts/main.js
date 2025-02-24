@@ -52,3 +52,40 @@ document.querySelectorAll(".editProjectBtn").forEach(btn => {
         }
     });
 });
+
+
+
+// Code um Daten im LocalStorage zu speichern
+
+document.addEventListener("DOMContentLoaded", function () {
+    const forms = document.querySelectorAll("form");
+
+    forms.forEach((form) => {
+        const formId = form.id;
+        const inputs = form.querySelectorAll("input, select");
+
+        // Daten aus localStorage laden
+        if (localStorage.getItem(formId)) {
+            const savedData = JSON.parse(localStorage.getItem(formId));
+            inputs.forEach((input) => {
+                if (savedData[input.name]) {
+                    input.value = savedData[input.name];
+                }
+            });
+        }
+
+        // Speichern der Daten bei Änderungen
+        form.addEventListener("input", () => {
+            let formData = {};
+            inputs.forEach((input) => {
+                formData[input.name] = input.value;
+            });
+            localStorage.setItem(formId, JSON.stringify(formData));
+        });
+
+        // Daten nach Absenden löschen
+        form.addEventListener("submit", () => {
+            localStorage.removeItem(formId);
+        });
+    });
+});

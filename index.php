@@ -21,7 +21,7 @@
                 <form enctype="multipart/form-data" id="projectForm" class="form-container" style="display: none;"
                     action="./assets/php/save_projects.php" method="post">
                     <label for="projectName">Projektname:</label>
-                    <input type="text" name="projectName">
+                    <input type="text" name="projectName" maxlength="45" placeholder="Max. 45 Zeichen" required>
                     <div class="date-container">
                         <div>
                             <label for="projectStartDate">Startdatum:</label>
@@ -60,17 +60,17 @@
 
                             // Verstecktes Bearbeitungsformular für das Projekt
                             echo '<form action="./assets/php/edit_project.php?id=' . $projectId . '" method="POST" class="form-container" id="editProjectForm-' . $projectId . '" style="display: none;">
-                <label for="projectName">Projektname:</label>
-                <input type="text" name="projectName" value="' . htmlspecialchars($row['name']) . '" required>
+                                    <label for="projectName">Projektname:</label>
+                                    <input type="text" name="projectName" value="' . htmlspecialchars($row['name']) . '" required>
 
-                <label for="startDate">Startdatum:</label>
-                <input type="date" name="startDate" value="' . $row['start_date'] . '" required>
+                                    <label for="startDate">Startdatum:</label>
+                                    <input type="date" name="startDate" value="' . $row['start_date'] . '" required>
 
-                <label for="endDate">Enddatum:</label>
-                <input type="date" name="endDate" value="' . $row['end_date'] . '" required>
+                                    <label for="endDate">Enddatum:</label>
+                                    <input type="date" name="endDate" value="' . $row['end_date'] . '" required>
 
-                <button type="submit" class="submit-btn">Änderungen speichern</button>
-            </form>';
+                                    <button type="submit" class="submit-btn">Änderungen speichern</button>
+                                </form>';
                         }
                     } else {
                         echo "Fehler bei der Ausführung der Abfrage.";
@@ -165,9 +165,9 @@
                 <form enctype="multipart/form-data" id="userForm" class="form-container" style="display: none;"
                     action="./assets/php/save_user.php" method="post">
                     <label for="userFirstName">Vorname:</label>
-                    <input class="userInput" type="text" name="userFirstName" required>
+                    <input class="userInput" type="text" name="userFirstName" maxlength="45" required placeholder="Max. 45 Zeichen">
                     <label for="userLastName">Nachname:</label>
-                    <input class="userInput" type="text" name="userLastName" required>
+                    <input class="userInput" type="text" name="userLastName" maxlength="45" required placeholder="Max. 45 Zeichen">
                     <label for="userLehrgang">Lehrgang:</label>
                     <input class="userInput" type="text" name="userLehrgang">
                     <button class="submit-btn" type="submit" id="saveUserBtn">Mitarbeiter speichern</button>
@@ -212,6 +212,61 @@
 
                 </div>
             </section>
+
+
+            <?php
+            include "./assets/php/db.php";
+            ?>
+
+            <section class="project-assignments">
+                <h1>Projektzuweisungen</h1>
+
+                <?php
+                $sql = "SELECT r.role_id, p.name AS project_name, t.teammember_id, t.first_name, t.last_name, r.name AS role_name
+            FROM role r
+            JOIN project p ON r.project_project_id = p.project_id
+            JOIN teammember t ON r.teammember_teammember_id = t.teammember_id
+            ORDER BY p.name, r.name";
+                $stmt = $conn->prepare($sql);
+
+                if ($stmt->execute()) {
+                    $result = $stmt->get_result();
+                    $current_project = null;
+
+                    while ($row = $result->fetch_assoc()) {
+                        if ($current_project !== $row['project_name']) {
+                            if ($current_project !== null) {
+                                echo "</ul>";
+                            }
+                            $current_project = $row['project_name'];
+                            echo "<h2>{$current_project}</h2><ul>";
+                        }
+
+                        $role_id = $row['role_id'];
+                        $teammember_id = $row['teammember_id'];
+                        echo '<p class="teammember-list">' . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . " | " . htmlspecialchars($row['role_name']) .
+                            ' <a href="./assets/php/delete_role.php?id=' . $role_id . '" class="delete-btn" onclick="return confirm(\'Eintrag wirklich löschen?\')" style="text-decoration: none;">❌</a>' .
+                            ' <a style="text-decoration: none; cursor: pointer;" class="editBtn" data-id="' . $role_id . '">🖊️</a></p>' .
+
+                            '<form action="./assets/php/edit_role.php?id=' . $role_id . '" enctype="multipart/form-data" class="form-container" style="display: none;" id="editForm-' . $role_id . '" method="POST">
+                            <label for="roleName">Rolle:</label>
+                            <input class="userInput" type="text" name="roleName" value="' . htmlspecialchars($row['role_name']) . '" required>
+                            <button class="submit-btn" type="submit">Änderungen speichern</button>
+                            </form>';
+                    }
+
+                    if ($current_project !== null) {
+                        echo "</ul>";
+                    }
+                } else {
+                    echo "Fehler beim Abrufen der Daten.";
+                }
+
+                $stmt->close();
+                $conn->close();
+                ?>
+            </section>
+
 
         </div>
     </main>
