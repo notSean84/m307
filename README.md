@@ -11,4 +11,10 @@
 > Ich kann für ein neues Projekt das Team (Coach, LB) zusammenstellen oder verwalten und die Rollen (PL, AMA usw.) der Mitglieder festlegen.
 
 ### Skizzen für Umsetzung
-![App Screenshot](https://drive.google.com/file/d/1RXhl0nsCkD8Ok8f1RQ3sHF6I26ehuD-k/view?usp=sharing)
+![Skizze Webseite + ERM Datenbank](https://github.com/user-attachments/assets/e9a52459-f8d9-42ff-8cd4-121562d8f4e5)
+
+### Funktionsüberprüfung
+**Video:**
+<a href="[https://readme.com/](https://sbw-my.sharepoint.com/:v:/g/personal/sean_hug_sbw-media_ch/EbsTnW5BlxdGkaPYlYUY0NQB_7cCSrTyz1D4RuvrKM8foA?e=AIRZfb)" target="_blank">Video zum Webseiten Test</a>
+
+Bei meiner Datenabnk können Mitarbeiter und Projekte hinzugefügt werden. Diese Mitarbeiter können dann einem Projekt und einer Rolle hinzugefügt werden. Sind Angaben falsch oder haben sich geändert, können diese leicht bearbeitet oder gelöscht werden.
