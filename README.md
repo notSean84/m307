@@ -11,4 +11,4 @@
 > Ich kann für ein neues Projekt das Team (Coach, LB) zusammenstellen oder verwalten und die Rollen (PL, AMA usw.) der Mitglieder festlegen.
 
 ### Skizzen für Umsetzung
-![App Screenshot](https://sbw-my.sharepoint.com/:i:/g/personal/sean_hug_sbw-media_ch/Ec4ogZpSkDdLt3razbPrhHsBNadK2HxATkTCG3AKEJ2bsQ?e=idz11Z)
+![App Screenshot](https://drive.google.com/file/d/1RXhl0nsCkD8Ok8f1RQ3sHF6I26ehuD-k/view?usp=sharing)
