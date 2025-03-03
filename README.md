@@ -15,6 +15,6 @@
 
 ### Funktionsüberprüfung
 **Video:**
-<a href="[https://readme.com/](https://sbw-my.sharepoint.com/:v:/g/personal/sean_hug_sbw-media_ch/EbsTnW5BlxdGkaPYlYUY0NQB_7cCSrTyz1D4RuvrKM8foA?e=AIRZfb)" target="_blank">Video zum Webseiten Test</a>
+<a href="[https://sbw-my.sharepoint.com/:v:/g/personal/sean_hug_sbw-media_ch/EbsTnW5BlxdGkaPYlYUY0NQB_7cCSrTyz1D4RuvrKM8foA?e=AIRZfb]" target="_blank">Video zum Webseiten Test</a>
 
 Bei meiner Datenabnk können Mitarbeiter und Projekte hinzugefügt werden. Diese Mitarbeiter können dann einem Projekt und einer Rolle hinzugefügt werden. Sind Angaben falsch oder haben sich geändert, können diese leicht bearbeitet oder gelöscht werden.
